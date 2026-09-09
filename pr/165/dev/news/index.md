@@ -2,12 +2,11 @@
 
 ## gsm.mapping (development version)
 
-- Added `invid` and `country` to the VS mapping (`VS.yaml`), so
-  `Mapped_VS` can support site- and country-level rollup of
-  repeat-measure metrics. `Mapped_VS` is now also sorted by `studyid`,
-  `subjid`, `vs_dt`, `visit`, giving downstream order-dependent metrics
-  a deterministic input
-  ([\#164](https://github.com/Gilead-Public/gsm.mapping/issues/164)).
+- Added a Vital Signs mapping (`VS.yaml`), producing `Mapped_VS` with
+  participant, site, and country identifiers alongside the vitals
+  measurements
+  ([\#128](https://github.com/Gilead-Public/gsm.mapping/issues/128),
+  [\#164](https://github.com/Gilead-Public/gsm.mapping/issues/164)).
 
 ## gsm.mapping v1.1.6
 
