@@ -54,6 +54,8 @@ lData <- list(
   Raw_Randomization = lSource$Raw_Randomization,
   Raw_VS = data.frame(
     studyid = "STUDY01",
+    invid = "SITE01",
+    country = "USA",
     subjid = "SUBJ01",
     visit = "Visit 1",
     vs_dt = as.Date("2024-01-01"),

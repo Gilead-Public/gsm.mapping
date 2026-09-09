@@ -7,6 +7,10 @@ spec:
   Raw_VS:
     studyid:
       type: character
+    invid:
+      type: character
+    country:
+      type: character
     subjid:
       type: character
     visit:
@@ -35,8 +39,11 @@ spec:
     bsa:
       type: numeric
 steps:
+  # Sorting here makes downstream repeat-measure metrics reproducible: they
+  # depend on the order of a subject's records, and raw extracts are unordered.
+  # visit breaks same-date ties.
   - output: Mapped_VS
-    name: "="
+    name: workr::RunQuery
     params:
-      lhs: Mapped_VS
-      rhs: Raw_VS
+      df: Raw_VS
+      strQuery: "SELECT * FROM df ORDER BY studyid, subjid, vs_dt, visit"

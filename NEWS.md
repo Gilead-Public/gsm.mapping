@@ -1,5 +1,7 @@
 # gsm.mapping (development version)
 
+- Added `invid` and `country` to the VS mapping (`VS.yaml`), so `Mapped_VS` can support site- and country-level rollup of repeat-measure metrics. `Mapped_VS` is now also sorted by `studyid`, `subjid`, `vs_dt`, `visit`, giving downstream order-dependent metrics a deterministic input (#164).
+
 # gsm.mapping v1.1.6
 
 This patch release removes the log4r package dependency, because the log4r package was archived on CRAN (#143, #113).
