@@ -7,6 +7,7 @@ spec:
   Raw_VS:
     studyid:
       type: character
+      source_col: project
     subjid:
       type: character
     visit:
@@ -20,8 +21,6 @@ spec:
       type: numeric
     height:
       type: numeric
-    bmi:
-      type: numeric
     sysbp:
       type: numeric
     diabp:
@@ -34,6 +33,7 @@ spec:
       type: numeric
     bsa:
       type: numeric
+      source_col: bsaentry
   Mapped_SUBJ:
     studyid:
       type: character

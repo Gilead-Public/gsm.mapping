@@ -24,21 +24,22 @@ make_vs_source <- function() {
     ),
     # Deliberately shuffled, with a same-date pair (Visit 1 / Visit 3) that only
     # the visit tie-breaker can order.
+    # Column names here are the RAW source names (project, foldername,
+    # bsaentry), so Ingest() exercises the spec's source_col remapping.
     Raw_VS = data.frame(
-      studyid = "S",
+      project = "S",
       subjid = c("S2", "S1", "S1", "S1"),
       foldername = c("Visit 1", "Visit 2", "Visit 3", "Visit 1"),
       vs_dt = as.Date(c("2020-01-01", "2020-02-01", "2020-01-01", "2020-01-01")),
       vsperf_std = "Y",
       weight = 70,
       height = 170,
-      bmi = 24.2,
       sysbp = c(110, 120, 130, 140),
       diabp = 80,
       pulse = 72,
       temp = 37,
       resp = 16,
-      bsa = 1.8,
+      bsaentry = 1.8,
       stringsAsFactors = FALSE
     )
   )
@@ -78,9 +79,9 @@ test_that("Mapped_VS draws invid and country from Mapped_SUBJ (#164)", {
     c("US", "US", "US", "CAN")
   )
 
-  # Additive only: the vitals columns still arrive.
+  # Additive only: the vitals columns still arrive, under their mapped names.
   expect_true(all(
-    c("weight", "height", "bmi", "sysbp", "diabp", "pulse", "temp", "resp", "bsa") %in%
+    c("weight", "height", "sysbp", "diabp", "pulse", "temp", "resp", "bsa") %in%
       names(mapped)
   ))
 
