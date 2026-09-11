@@ -2,7 +2,6 @@ meta:
   Type: Mapped
   ID: VS
   Description: Vital Signs Data Mapping
-  # Priority 2: depends on Mapped_SUBJ, which is produced at Priority 1.
   Priority: 2
 spec:
   Raw_VS:
