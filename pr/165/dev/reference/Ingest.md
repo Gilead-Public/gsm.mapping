@@ -51,7 +51,7 @@ lRawData <- Ingest(lSourceData, lIngestWorkflow$spec)
 #> ℹ Ingesting data for AE.
 #> [INFO] Creating a new temporary DuckDB connection.
 #> duckdb keeps downloaded extensions and secrets in a temporary directory:
-#> ℹ /tmp/RtmpZRDkYG/duckdb
+#> ℹ /tmp/RtmpANTBKX/duckdb
 #> This is removed when the R session ends.
 #> • Extensions are re-downloaded each session.
 #> • Secrets are lost.
