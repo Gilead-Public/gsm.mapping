@@ -1,5 +1,7 @@
 # gsm.mapping (development version)
 
+- Added a Vital Signs mapping (`VS.yaml`), producing `Mapped_VS` with participant, site, and country identifiers alongside the vitals measurements (#128, #164).
+
 # gsm.mapping v1.1.6
 
 This patch release removes the log4r package dependency, because the log4r package was archived on CRAN (#143, #113).

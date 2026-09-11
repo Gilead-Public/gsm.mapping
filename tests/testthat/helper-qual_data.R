@@ -52,6 +52,8 @@ lData <- list(
     # match the mapping spec (rs_dt: type: Date) and the production Ingest() path.
     mutate(rs_dt = as.Date(rs_dt)),
   Raw_Randomization = lSource$Raw_Randomization,
+  # This helper feeds RunWorkflows directly, bypassing Ingest(), so columns use
+  # the spec's mapped names rather than the raw source names (project, bsaentry).
   Raw_VS = data.frame(
     studyid = "STUDY01",
     subjid = "SUBJ01",
@@ -60,7 +62,6 @@ lData <- list(
     vsperf_std = "Y",
     weight = 70,
     height = 170,
-    bmi = 24.2,
     sysbp = 120,
     diabp = 80,
     pulse = 72,

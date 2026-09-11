@@ -9,8 +9,7 @@ test_that("Qual: mappings now done by individual domain, test that inputs and ou
     "STUDCOMP.yaml",
     "SUBJ.yaml",
     "OverallResponse.yaml",
-    "Randomization.yaml",
-    "VS.yaml"
+    "Randomization.yaml"
   )
 
   mapped_p1_yaml <- map(
@@ -54,7 +53,7 @@ test_that("Qual: mappings now done by individual domain, test that inputs and ou
 # Priority 2 Mappings
 
 test_that("Qual: mappings now done by individual domain, test that inputs and outputs of priority 2 mappings are completed as expected (#97, #114)", {
-  priority2 <- c("DATACHG.yaml", "DATAENT.yaml", "QUERY.yaml", "Death.yaml")
+  priority2 <- c("DATACHG.yaml", "DATAENT.yaml", "QUERY.yaml", "Death.yaml", "VS.yaml")
 
   mapped_p2_yaml <- map(
     priority2,
@@ -76,7 +75,7 @@ test_that("Qual: mappings now done by individual domain, test that inputs and ou
   iwalk(
     mapped_p2_yaml,
     ~ expect_true(
-      flatten(.x$steps)$output %in% c(names(mapped_data), "Temp_SubjectLookup", "Temp_Death")
+      flatten(.x$steps)$output %in% c(names(mapped_data), "Temp_SubjectLookup", "Temp_Death", "Temp_VS")
     )
   )
 
