@@ -1,5 +1,7 @@
 # gsm.mapping (development version)
 
+* Added the `IPNS` mapping, recoding `drv_ip_nonstarter_status` to an ordinal `ipns_status_ord` (0-3, `NA` for unrecognised statuses) (#162).
+
 # gsm.mapping v1.1.6
 
 This patch release removes the log4r package dependency, because the log4r package was archived on CRAN (#143, #113).
