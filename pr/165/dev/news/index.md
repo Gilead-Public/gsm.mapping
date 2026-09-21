@@ -7,6 +7,9 @@
   measurements
   ([\#128](https://github.com/Gilead-Public/gsm.mapping/issues/128),
   [\#164](https://github.com/Gilead-Public/gsm.mapping/issues/164)).
+- Added the `IPNS` mapping, recoding `drv_ip_nonstarter_status` to an
+  ordinal `ipns_status_ord` (0-3, `NA` for unrecognised statuses)
+  ([\#162](https://github.com/Gilead-Public/gsm.mapping/issues/162)).
 
 ## gsm.mapping v1.1.6
 
