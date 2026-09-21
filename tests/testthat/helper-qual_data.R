@@ -7,7 +7,21 @@ lSource <- gsm.core::lSource
 
 # Step 0 - Data Ingestion - standardize tables/columns names
 lData <- list(
-  Raw_SUBJ = lSource$Raw_SUBJ,
+  # Shimmed until gsm.core regenerates lSource with the upstream drv_ fields;
+  # the Raw_LB entry below uses the same pattern for lbtstnam/rptresn.
+  Raw_SUBJ = lSource$Raw_SUBJ %>%
+    mutate(
+      drv_enrollment_dt = .data$enrolldt,
+      drv_ip_dosed = ifelse(is.na(.data$firstdosedate), "N", "Y"),
+      drv_ip_first_dose_dt = .data$firstdosedate,
+      drv_enrl_first_dose_days = as.integer(.data$firstdosedate - .data$enrolldt) + 1L,
+      drv_days_lapsed_since_enrl = NA_integer_,
+      drv_ip_nonstarter_status = ifelse(
+        is.na(.data$firstdosedate),
+        "Potential Non-Starter within window",
+        "Dosed"
+      )
+    ),
   Raw_AE = lSource$Raw_AE,
   Raw_PD = lSource$Raw_PD %>%
     rename(subjid = subjectenrollmentnumber) %>%

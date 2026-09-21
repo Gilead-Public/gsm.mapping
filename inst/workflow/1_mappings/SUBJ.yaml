@@ -25,6 +25,18 @@ spec:
       type: Date
     timeontreatment:
       type: integer
+    drv_enrollment_dt:
+      type: Date
+    drv_ip_dosed:
+      type: character
+    drv_ip_first_dose_dt:
+      type: Date
+    drv_enrl_first_dose_days:
+      type: integer
+    drv_days_lapsed_since_enrl:
+      type: integer
+    drv_ip_nonstarter_status:
+      type: character
     agerep:
       type: integer
     sex:
