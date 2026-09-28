@@ -2,6 +2,7 @@
 
 - Added a Vital Signs mapping (`VS.yaml`), producing `Mapped_VS` with participant, site, and country identifiers alongside the vitals measurements (#128, #164).
 - Added the `IPNS` mapping, recoding `drv_ip_nonstarter_status` to an ordinal `ipns_status_ord` (0-3, `NA` for unrecognised statuses) (#162).
+- `SUBJ` passes `drv_kit_assigned` through to `Mapped_SUBJ`, and `IPNS` adds it and a display label, `ipns_status`, to `Mapped_IPNS` (#166).
 
 # gsm.mapping v1.1.6
 

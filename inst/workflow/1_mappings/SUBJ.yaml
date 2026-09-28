@@ -37,6 +37,8 @@ spec:
       type: integer
     drv_ip_nonstarter_status:
       type: character
+    drv_kit_assigned:
+      type: character
     agerep:
       type: integer
     sex:
