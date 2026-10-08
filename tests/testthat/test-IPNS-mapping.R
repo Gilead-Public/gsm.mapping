@@ -1,16 +1,3 @@
-# Reads the SOURCE workflow YAML: under load_all, system.file() resolves to the
-# source root, so the directory is passed explicitly rather than by strPackage.
-ipns_workflow <- function() {
-  workr::MakeWorkflowList(
-    strNames = "IPNS",
-    strPath = file.path(
-      system.file(package = "gsm.mapping"),
-      "workflow",
-      "1_mappings"
-    )
-  )
-}
-
 test_that("IPNS recodes each status to its ordinal and report label (#162, #166)", {
   mapped <- list(
     Mapped_SUBJ = data.frame(
@@ -34,7 +21,7 @@ test_that("IPNS recodes each status to its ordinal and report label (#162, #166)
     )
   )
 
-  res <- workr::RunWorkflows(ipns_workflow(), mapped)$Mapped_IPNS
+  res <- workr::RunWorkflows(mapping_workflows("IPNS"), mapped)$Mapped_IPNS
 
   expect_equal(nrow(res), 4)
   expect_equal(res$ipns_status_ord, c(0, 1, 2, 3))
@@ -68,25 +55,13 @@ test_that("an unrecognised status yields NA, keeping the subject in the denomina
     )
   )
 
-  res <- workr::RunWorkflows(ipns_workflow(), mapped)$Mapped_IPNS
+  res <- workr::RunWorkflows(mapping_workflows("IPNS"), mapped)$Mapped_IPNS
 
   expect_equal(nrow(res), 1)
   expect_true(is.na(res$ipns_status_ord))
   expect_true(is.na(res$ipns_status))
 })
 
-subj_ipns_workflows <- function() {
-  workr::MakeWorkflowList(
-    strNames = c("SUBJ", "IPNS"),
-    strPath = file.path(
-      system.file(package = "gsm.mapping"),
-      "workflow",
-      "1_mappings"
-    )
-  )
-}
-
-# Routed through Ingest(): RunWorkflows() alone passes columns whatever the spec says.
 test_that("drv_kit_assigned reaches Mapped_SUBJ and Mapped_IPNS unchanged (#166)", {
   raw <- data.frame(
     studyid = "S",
@@ -113,12 +88,7 @@ test_that("drv_kit_assigned reaches Mapped_SUBJ and Mapped_IPNS unchanged (#166)
     drv_kit_assigned = c("Y", "N", NA, NA),
     stringsAsFactors = FALSE
   )
-  wf <- subj_ipns_workflows()
-  lRaw <- gsm.mapping::Ingest(
-    list(Raw_SUBJ = raw),
-    gsm.mapping::CombineSpecs(wf["SUBJ"])
-  )
-  mapped <- workr::RunWorkflows(wf, lRaw)
+  mapped <- run_from_raw_subj(raw, c("SUBJ", "IPNS"))
 
   expect_equal(mapped$Mapped_SUBJ$drv_kit_assigned, c("Y", "N", NA))
   expect_equal(mapped$Mapped_IPNS$drv_kit_assigned, c("Y", "N", NA))
