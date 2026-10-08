@@ -37,6 +37,14 @@ spec:
       type: integer
     drv_ip_nonstarter_status:
       type: character
+    drv_kit_assigned:
+      type: character
+    drv_treatment_discontinuation_dt:
+      type: Date
+    drv_premature_discontinuation_reason:
+      type: character
+    drv_days_lapsed_enrl_discontinuation:
+      type: integer
     agerep:
       type: integer
     sex:

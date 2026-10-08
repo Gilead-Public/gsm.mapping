@@ -25,6 +25,8 @@ spec:
       type: integer
     drv_ip_nonstarter_status:
       type: character
+    drv_kit_assigned:
+      type: character
 steps:
   # Isolated from SUBJ.yaml on purpose: a CASE over an absent column fails the
   # whole subject mapping, which would break every study without the upstream
@@ -37,11 +39,17 @@ steps:
         SELECT studyid, subjid, invid, country,
                drv_enrollment_dt, drv_ip_dosed, drv_ip_first_dose_dt,
                drv_enrl_first_dose_days, drv_days_lapsed_since_enrl,
-               drv_ip_nonstarter_status,
+               drv_ip_nonstarter_status, drv_kit_assigned,
                CASE drv_ip_nonstarter_status
                  WHEN 'Dosed'                                THEN 0
                  WHEN 'Potential Non-Starter within window'  THEN 1
                  WHEN 'Potential Non-Starter outside window' THEN 2
                  WHEN 'Confirmed Non-Starter'                THEN 3
-               END AS ipns_status_ord
+               END AS ipns_status_ord,
+               CASE drv_ip_nonstarter_status
+                 WHEN 'Dosed'                                THEN 'Dosed'
+                 WHEN 'Potential Non-Starter within window'  THEN 'Potential IP non-starter - within window'
+                 WHEN 'Potential Non-Starter outside window' THEN 'Potential IP non-starter - outside window'
+                 WHEN 'Confirmed Non-Starter'                THEN 'Confirmed IP non-starter'
+               END AS ipns_status
         FROM df
