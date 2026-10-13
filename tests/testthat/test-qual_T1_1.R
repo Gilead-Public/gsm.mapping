@@ -52,8 +52,8 @@ test_that("Qual: mappings now done by individual domain, test that inputs and ou
 
 # Priority 2 Mappings
 
-test_that("Qual: mappings now done by individual domain, test that inputs and outputs of priority 2 mappings are completed as expected (#97, #114)", {
-  priority2 <- c("DATACHG.yaml", "DATAENT.yaml", "QUERY.yaml", "Death.yaml", "VS.yaml")
+test_that("Qual: mappings now done by individual domain, test that inputs and outputs of priority 2 mappings are completed as expected (#97, #114, #166)", {
+  priority2 <- c("DATACHG.yaml", "DATAENT.yaml", "QUERY.yaml", "Death.yaml", "VS.yaml", "IPNS.yaml")
 
   mapped_p2_yaml <- map(
     priority2,
