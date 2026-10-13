@@ -16,13 +16,13 @@ Source:
 [`DESCRIPTION`](https://github.com/Gilead-Public/gsm.mapping/blob/dev/DESCRIPTION)
 
 Wildfire J, Maxwell L, Zhu Z (2026). *gsm.mapping: Good Statistical
-Monitoring Mapping*. R package version 1.1.6.9000,
+Monitoring Mapping*. R package version 1.1.6.9001,
 <https://github.com/Gilead-Public/gsm.mapping>.
 
     @Manual{,
       title = {gsm.mapping: Good Statistical Monitoring Mapping},
       author = {Jeremy Wildfire and Laura Maxwell and Zelos Zhu},
       year = {2026},
-      note = {R package version 1.1.6.9000},
+      note = {R package version 1.1.6.9001},
       url = {https://github.com/Gilead-Public/gsm.mapping},
     }
