@@ -1,6 +1,6 @@
 Package: gsm.mapping
 Title: Good Statistical Monitoring Mapping
-Version: 1.1.6.9000
+Version: 1.1.6.9001
 Authors@R: c(
     person("Jeremy", "Wildfire", , "jwildfire@gmail.com", role = c("aut", "cre")),
     person("Laura", "Maxwell", , "laura.maxwell@atorusresearch.com", role = "aut"),
