@@ -4,6 +4,7 @@
 - Added the `IPNS` mapping, recoding `drv_ip_nonstarter_status` to an ordinal `ipns_status_ord` (0-3, `NA` for unrecognised statuses) (#162).
 - `SUBJ` passes `drv_kit_assigned` through to `Mapped_SUBJ`, and `IPNS` adds it and a display label, `ipns_status`, to `Mapped_IPNS` (#166).
 - `SUBJ` passes three premature treatment discontinuation fields to `Mapped_SUBJ`: `drv_treatment_discontinuation_dt`, `drv_premature_discontinuation_reason` and `drv_days_lapsed_enrl_discontinuation` (#160).
+- `AE` passes three fatal adverse event fields to `Mapped_AE`: `aeout` (outcome), `aereldrv` (derived relatedness) and `aesdth` (serious: resulted in death) (#135).
 
 # gsm.mapping v1.1.6
 
