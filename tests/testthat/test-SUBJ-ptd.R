@@ -32,3 +32,19 @@ test_that("a study delivering none of the PTD fields still maps SUBJ (#160)", {
   expect_equal(nrow(res), 3)
   expect_false(any(grepl("discontinu", names(res))))
 })
+
+test_that("SUBJ passes every drv_drg_completion value to Mapped_SUBJ unchanged (#174)", {
+  values <- c("Y", "N", "Potential No", NA, "")
+  raw <- data.frame(
+    studyid = "S",
+    invid = "I1",
+    country = "US",
+    subjid = paste0("S", seq_along(values)),
+    enrollyn = "Y",
+    drv_drg_completion = values,
+    stringsAsFactors = FALSE
+  )
+  res <- run_from_raw_subj(raw)$Mapped_SUBJ
+
+  expect_identical(res$drv_drg_completion, values)
+})
