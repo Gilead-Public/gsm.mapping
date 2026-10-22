@@ -96,6 +96,13 @@ mappings_wf <- workr::MakeWorkflowList(
   strPath = file.path(system.file(package = "gsm.mapping"), "workflow", "1_mappings")
 )
 
+for (workflow_name in names(mappings_wf)) {
+  if (identical(mappings_wf[[workflow_name]]$meta$ID, "Death")) {
+    mappings_wf[[workflow_name]]$steps[[2]]$params$chrDeathResponse <- "Death"
+    mappings_wf[[workflow_name]]$steps[[2]]$params$chrPDResponse <- "PD"
+  }
+}
+
 gsm.core::SetLogLevel(level = "WARN")
 mapped_data <- workr::RunWorkflows(mappings_wf, lData)
 gsm.core::SetLogLevel(level = "DEBUG")
