@@ -45,6 +45,8 @@ spec:
       type: character
     drv_days_lapsed_enrl_discontinuation:
       type: integer
+    drv_drg_completion:
+      type: character
     agerep:
       type: integer
     sex:
