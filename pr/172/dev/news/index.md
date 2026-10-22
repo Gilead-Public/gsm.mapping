@@ -13,15 +13,16 @@
 - `SUBJ` passes `drv_kit_assigned` through to `Mapped_SUBJ`, and `IPNS`
   adds it and a display label, `ipns_status`, to `Mapped_IPNS`
   ([\#166](https://github.com/Gilead-Public/gsm.mapping/issues/166)).
-- `SUBJ` passes three premature treatment discontinuation fields to
-  `Mapped_SUBJ`: `drv_treatment_discontinuation_dt`,
-  `drv_premature_discontinuation_reason` and
-  `drv_days_lapsed_enrl_discontinuation`
-  ([\#160](https://github.com/Gilead-Public/gsm.mapping/issues/160)).
 - `AE` passes three fatal adverse event fields to `Mapped_AE`: `aeout`
   (outcome), `aereldrv` (derived relatedness) and `aesdth` (serious:
   resulted in death)
   ([\#135](https://github.com/Gilead-Public/gsm.mapping/issues/135)).
+- `SUBJ` passes four premature treatment discontinuation fields to
+  `Mapped_SUBJ`: `drv_treatment_discontinuation_dt`,
+  `drv_premature_discontinuation_reason`,
+  `drv_days_lapsed_enrl_discontinuation` and `drv_drg_completion`
+  ([\#160](https://github.com/Gilead-Public/gsm.mapping/issues/160),
+  [\#174](https://github.com/Gilead-Public/gsm.mapping/issues/174)).
 
 ## gsm.mapping v1.1.6
 
