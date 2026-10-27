@@ -2,6 +2,50 @@
 test <- mapped_data$Mapped_Death
 
 # Testing ======================================================================
+test_that("Death workflow uses explicit death and progression responses (#170)", {
+  workflows <- workr::MakeWorkflowList(
+    strNames = "Death",
+    strPath = file.path(system.file(package = "gsm.mapping"), "workflow", "1_mappings")
+  )
+  params <- workflows[[1]]$steps[[2]]$params
+  expect_identical(params$chrDeathResponse, "DEATH")
+  expect_identical(params$chrPDResponse, "Progressive Disease")
+
+  source_data <- list(
+    Raw_Death = data.frame(
+      studyid = character(),
+      subjid = character(),
+      death_dt = as.Date(character()),
+      deathcls = character()
+    ),
+    Mapped_STUDCOMP = data.frame(
+      studyid = "STUDY001",
+      subjid = c("DEATH_MATCH", "DEATH_DEFAULT"),
+      compreas = c("DEATH", "Death")
+    ),
+    Mapped_OverallResponse = data.frame(
+      studyid = "STUDY001",
+      subjid = c("PD_MATCH", "PD_MATCH", "PD_DEFAULT"),
+      ovrlresp = c("Progressive Disease", "Progressive Disease", "PD"),
+      rs_dt = as.Date(c("2023-06-15", "2023-05-10", "2023-04-01"))
+    ),
+    Mapped_Randomization = data.frame(
+      studyid = "STUDY001",
+      subjid = c("DEATH_MATCH", "DEATH_DEFAULT", "PD_MATCH", "PD_DEFAULT"),
+      rgmn_dt = as.Date("2023-01-01")
+    )
+  )
+
+  result <- workr::RunWorkflows(workflows, source_data)$Mapped_Death
+
+  expect_identical(sort(result$subjid), c("DEATH_MATCH", "PD_MATCH"))
+  expect_true(result$death[result$subjid == "DEATH_MATCH"])
+  expect_equal(
+    result$pd_date[result$subjid == "PD_MATCH"],
+    as.Date("2023-05-10")
+  )
+})
+
 testthat::test_that("verify complete_death() internal study_comp filter is working properly (#47)", {
   original_code <- mapped_data$Mapped_STUDCOMP %>%
     filter(.data$compreas == "Death") %>%

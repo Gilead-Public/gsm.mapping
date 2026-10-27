@@ -58,3 +58,5 @@ steps:
       dfStudyCompletion: Mapped_STUDCOMP
       dfOverallResponse: Mapped_OverallResponse
       dfRandomization: Mapped_Randomization
+      chrDeathResponse: DEATH
+      chrPDResponse: Progressive Disease
