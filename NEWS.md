@@ -1,5 +1,9 @@
-# gsm.mapping (development version)
+# gsm.mapping v1.2.0
 
+This minor release adds the mappings needed for the IP Monitoring (IP non-starters and premature treatment discontinuation) and Repeat Measurements metrics.
+
+- `LB` adds the `rptresn` (reported numeric result) and `lbtstnam` fields (#129).
+- The `Death` workflow gains `chrDeathResponse` and `chrPDResponse` arguments to pass discontinuation reason and overall response values explicitly (#170).
 - Added a Vital Signs mapping (`VS.yaml`), producing `Mapped_VS` with participant, site, and country identifiers alongside the vitals measurements (#128, #164).
 - Added the `IPNS` mapping, recoding `drv_ip_nonstarter_status` to an ordinal `ipns_status_ord` (0-3, `NA` for unrecognised statuses) (#162).
 - `SUBJ` passes `drv_kit_assigned` through to `Mapped_SUBJ`, and `IPNS` adds it and a display label, `ipns_status`, to `Mapped_IPNS` (#166).
