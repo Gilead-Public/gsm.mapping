@@ -13,6 +13,10 @@ spec:
       type: character
     lb_dt:
       type: Date
+    lbtstnam:
+      type: character
+    rptresn:
+      type: numeric
 steps:
   - output: Mapped_LB
     name: =
