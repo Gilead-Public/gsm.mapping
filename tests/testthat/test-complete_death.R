@@ -5,7 +5,11 @@ test <- mapped_data$Mapped_Death
 test_that("Death workflow uses explicit death and progression responses (#170)", {
   workflows <- workr::MakeWorkflowList(
     strNames = "Death",
-    strPath = file.path(system.file(package = "gsm.mapping"), "workflow", "1_mappings")
+    strPath = file.path(
+      system.file(package = "gsm.mapping"),
+      "workflow",
+      "1_mappings"
+    )
   )
   params <- workflows[[1]]$steps[[2]]$params
   expect_identical(params$chrDeathResponse, "DEATH")
@@ -57,7 +61,8 @@ testthat::test_that("verify complete_death() internal study_comp filter is worki
       filter(compreas == "Death") %>%
       pull(subjid),
     lSource$Raw_Death$subjid
-  ) %>% unique()
+  ) %>%
+    unique()
 
   expect_identical(sort(original_code$subjid), sort(double_code))
 })
