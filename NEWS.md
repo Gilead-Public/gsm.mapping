@@ -1,3 +1,14 @@
+# gsm.mapping v1.2.0
+
+This minor release adds the mappings needed for the IP Monitoring (IP non-starters and premature treatment discontinuation) and Repeat Measurements metrics.
+
+- `LB` adds the `rptresn` (reported numeric result) and `lbtstnam` fields (#129).
+- The `Death` workflow gains `chrDeathResponse` and `chrPDResponse` arguments to pass discontinuation reason and overall response values explicitly (#170).
+- Added a Vital Signs mapping (`VS.yaml`), producing `Mapped_VS` with participant, site, and country identifiers alongside the vitals measurements (#128, #164).
+- Added the `IPNS` mapping, recoding `drv_ip_nonstarter_status` to an ordinal `ipns_status_ord` (0-3, `NA` for unrecognised statuses) (#162).
+- `SUBJ` passes `drv_kit_assigned` through to `Mapped_SUBJ`, and `IPNS` adds it and a display label, `ipns_status`, to `Mapped_IPNS` (#166).
+- `SUBJ` passes four premature treatment discontinuation fields to `Mapped_SUBJ`: `drv_treatment_discontinuation_dt`, `drv_premature_discontinuation_reason`, `drv_days_lapsed_enrl_discontinuation` and `drv_drg_completion` (#160, #174).
+
 # gsm.mapping v1.1.6
 
 This patch release removes the log4r package dependency, because the log4r package was archived on CRAN (#143, #113).
