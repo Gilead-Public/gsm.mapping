@@ -2,7 +2,7 @@
 
 ## Mapping Workflows
 
-Currently, there exist **23 domains** that have mapping specifications
+Currently, there exist **25 domains** that have mapping specifications
 for transforming raw/source data into standardized formats for GSM
 workflows. Each mapping specification defines the required variables,
 their data types, and transformation rules needed to create consistent,
