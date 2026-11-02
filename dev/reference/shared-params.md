@@ -17,7 +17,7 @@ Reused parameter definitions are gathered here for easier usage.
 
   `data.frame` A stacked summary of analysis pipeline output. Created by
   passing a list of results returned by
-  [`gsm.core::Summarize()`](https://gilead-biostats.github.io/gsm.core/reference/Summarize.html)
+  [`gsm.core::Summarize()`](https://gilead-public.github.io/gsm.core/reference/Summarize.html)
   to `gsm.reporting::BindResults()`. Expected columns: `GroupID`,
   `GroupLevel`, `Numerator`, `Denominator`, `Metric`, `Score`, `Flag`,
   `MetricID`, `StudyID`, `SnapshotDate`.
@@ -42,7 +42,7 @@ Reused parameter definitions are gathered here for easier usage.
 
   `data.frame` Input data with one record per subject. Created by
   passing Raw+ data into
-  [`gsm.core::Input_Rate()`](https://gilead-biostats.github.io/gsm.core/reference/Input_Rate.html).
+  [`gsm.core::Input_Rate()`](https://gilead-public.github.io/gsm.core/reference/Input_Rate.html).
   Expected columns: `GroupID`, `GroupLevel`, `Numerator`, `Denominator`
   and/or columns specified in `strCountCol` and `strGroupCol`.
 
