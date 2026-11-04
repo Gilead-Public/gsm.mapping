@@ -25,6 +25,12 @@ spec:
       type: character
     aerel:
       type: character
+    aeout:
+      type: character
+    aereldrv:
+      type: character
+    aesdth:
+      type: character
     mincreated_dts:
       type: timestamp
 steps:
