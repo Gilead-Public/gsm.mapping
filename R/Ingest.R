@@ -37,28 +37,32 @@ Ingest <- function(lSourceData, lSpec, strDomain = "Raw") {
   names(lSourceData) <- sub(".*_", "", names(lSourceData))
   names(lSpec) <- sub(".*_", "", names(lSpec))
 
-  lMappedData <- lSpec %>% imap(
-    function(columnSpecs, domain) {
-      gsm.core::LogMessage(
-        level = "info",
-        message = "Ingesting data for {domain}.",
-        cli_detail = "alert_info"
-      )
+  lMappedData <- lSpec %>%
+    imap(
+      function(columnSpecs, domain) {
+        gsm.core::LogMessage(
+          level = "info",
+          message = "Ingesting data for {domain}.",
+          cli_detail = "alert_info"
+        )
 
-      # check that the domain exists in the source data
-      dfSource <- lSourceData[[domain]]
+        # check that the domain exists in the source data
+        dfSource <- lSourceData[[domain]]
 
-      gsm.core::stop_if(cnd = is.null(dfSource), message = glue("Domain '*_{domain}' not found in source data."))
+        gsm.core::stop_if(
+          cnd = is.null(dfSource),
+          message = glue("Domain '*_{domain}' not found in source data.")
+        )
 
-      dfMapped <- ApplySpec(
-        dfSource,
-        columnSpecs,
-        domain
-      )
+        dfMapped <- ApplySpec(
+          dfSource,
+          columnSpecs,
+          domain
+        )
 
-      return(dfMapped)
-    }
-  )
+        return(dfMapped)
+      }
+    )
 
   names(lMappedData) <- paste(strDomain, names(lMappedData), sep = "_")
 

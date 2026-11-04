@@ -53,7 +53,14 @@ test_that("Qual: mappings now done by individual domain, test that inputs and ou
 # Priority 2 Mappings
 
 test_that("Qual: mappings now done by individual domain, test that inputs and outputs of priority 2 mappings are completed as expected (#97, #114, #166)", {
-  priority2 <- c("DATACHG.yaml", "DATAENT.yaml", "QUERY.yaml", "Death.yaml", "VS.yaml", "IPNS.yaml")
+  priority2 <- c(
+    "DATACHG.yaml",
+    "DATAENT.yaml",
+    "QUERY.yaml",
+    "Death.yaml",
+    "VS.yaml",
+    "IPNS.yaml"
+  )
 
   mapped_p2_yaml <- map(
     priority2,
@@ -69,13 +76,23 @@ test_that("Qual: mappings now done by individual domain, test that inputs and ou
 
   iwalk(
     mapped_p2_yaml,
-    ~ expect_true(all(names(.x$spec) %in% c(names(lData), "Mapped_SUBJ", "Mapped_Randomization", "Mapped_OverallResponse", "Mapped_STUDCOMP")))
+    ~ expect_true(all(
+      names(.x$spec) %in%
+        c(
+          names(lData),
+          "Mapped_SUBJ",
+          "Mapped_Randomization",
+          "Mapped_OverallResponse",
+          "Mapped_STUDCOMP"
+        )
+    ))
   )
 
   iwalk(
     mapped_p2_yaml,
     ~ expect_true(
-      flatten(.x$steps)$output %in% c(names(mapped_data), "Temp_SubjectLookup", "Temp_Death", "Temp_VS")
+      flatten(.x$steps)$output %in%
+        c(names(mapped_data), "Temp_SubjectLookup", "Temp_Death", "Temp_VS")
     )
   )
 
@@ -84,8 +101,11 @@ test_that("Qual: mappings now done by individual domain, test that inputs and ou
     ~ expect_true(all(
       names(flatten(.x$spec)) %in%
         c(
-          names(lData[names(.x$spec)][[1]]), names(lData["Raw_SUBJ"][[1]]), names(lData["Raw_Randomization"][[1]]),
-          names(lData["Raw_OverallResponse"][[1]]), names(lData["Raw_STUDCOMP"][[1]])
+          names(lData[names(.x$spec)][[1]]),
+          names(lData["Raw_SUBJ"][[1]]),
+          names(lData["Raw_Randomization"][[1]]),
+          names(lData["Raw_OverallResponse"][[1]]),
+          names(lData["Raw_STUDCOMP"][[1]])
         )
     ))
   )
