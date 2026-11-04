@@ -19,7 +19,10 @@
 #'
 #' @export
 MakeLongMeta <- function(data, strGroupLevel, strGroupCols = "GroupID") {
-  gsm.core::stop_if(!all(strGroupCols %in% names(data)), "strGroupCols not found in data")
+  gsm.core::stop_if(
+    !all(strGroupCols %in% names(data)),
+    "strGroupCols not found in data"
+  )
   param_cols <- names(data)[!(names(data) %in% strGroupCols)]
   data <- data %>%
     dplyr::mutate(dplyr::across(dplyr::everything(), as.character))

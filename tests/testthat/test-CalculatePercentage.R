@@ -16,7 +16,11 @@ test_that("CalculatePercentage calculates percentage and formats correctly (#noi
 
   # Expected values
   expected_percentage <- c(50, 40, 50)
-  expected_formatted_string <- c("50 / 100 (50%)", "20 / 50 (40%)", "30 / 60 (50%)")
+  expected_formatted_string <- c(
+    "50 / 100 (50%)",
+    "20 / 50 (40%)",
+    "30 / 60 (50%)"
+  )
 
   # Check if the result matches the expected values
   expect_equal(result$percentage, expected_percentage)

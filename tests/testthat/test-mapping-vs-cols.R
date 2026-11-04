@@ -30,7 +30,12 @@ make_vs_source <- function() {
       project = "S",
       subjid = c("S2", "S1", "S1", "S1"),
       foldername = c("Visit 1", "Visit 2", "Visit 3", "Visit 1"),
-      vs_dt = as.Date(c("2020-01-01", "2020-02-01", "2020-01-01", "2020-01-01")),
+      vs_dt = as.Date(c(
+        "2020-01-01",
+        "2020-02-01",
+        "2020-01-01",
+        "2020-01-01"
+      )),
       vsperf_std = "Y",
       weight = 70,
       height = 170,
