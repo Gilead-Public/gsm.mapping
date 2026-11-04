@@ -1,5 +1,7 @@
 # Changelog
 
+## gsm.mapping (development version)
+
 ## gsm.mapping v1.2.0
 
 This minor release adds the mappings needed for the IP Monitoring (IP
