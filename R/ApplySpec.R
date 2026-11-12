@@ -39,7 +39,11 @@ ApplySpec <- function(dfSource, columnSpecs, domain) {
     imap(
       function(spec, name) {
         mapping <- list(target = name)
-        mapping$source <- if (is.null(spec$source_col)) name else spec$source_col
+        mapping$source <- if (is.null(spec$source_col)) {
+          name
+        } else {
+          spec$source_col
+        }
         mapping$type <- if (is.null(spec$type)) NULL else spec$type
         return(mapping)
       }
@@ -53,11 +57,12 @@ ApplySpec <- function(dfSource, columnSpecs, domain) {
       if (mapping$source == mapping$target) {
         quote_identifier(mapping$source)
       } else {
-        glue("{quote_identifier(mapping$source)} AS {quote_identifier(mapping$target)}")
+        glue(
+          "{quote_identifier(mapping$source)} AS {quote_identifier(mapping$target)}"
+        )
       }
     }) %>%
     paste(collapse = ", ")
-
 
   strQuery <- glue("SELECT {strColQuery} FROM df")
 

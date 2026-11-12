@@ -66,7 +66,9 @@ complete_death <- function(
     left_join(dfRandomization, by = c("studyid", "subjid")) %>%
     mutate(
       death_dt = .data[[chrDeathDateCol]],
-      death_dy = as.numeric(.data[[chrDeathDateCol]] - .data[[chrRandomizationDateCol]]),
+      death_dy = as.numeric(
+        .data[[chrDeathDateCol]] - .data[[chrRandomizationDateCol]]
+      ),
       death = TRUE
     )
 
