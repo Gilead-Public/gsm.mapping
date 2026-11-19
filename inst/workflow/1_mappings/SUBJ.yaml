@@ -47,6 +47,18 @@ spec:
       type: integer
     drv_drg_completion:
       type: character
+    drv_study_disposition:
+      type: character
+    drv_last_contact_dt:
+      type: Date
+    drv_withdrawn_dt:
+      type: Date
+    drv_death_dt:
+      type: Date
+    drv_ae_death_dt:
+      type: Date
+    rbqm_flags:
+      type: character
     agerep:
       type: integer
     sex:
