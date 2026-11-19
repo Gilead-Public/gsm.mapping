@@ -1,5 +1,15 @@
 # Priority 1 mappings
-test_that("Qual: mappings now done by individual domain, test that inputs and outputs of priority 1 mappings are completed as expected (#97, #114, #128, #129)", {
+# These upstream columns may be absent from older source snapshots.
+disp_source_fields <- c(
+  "drv_study_disposition",
+  "drv_last_contact_dt",
+  "drv_withdrawn_dt",
+  "drv_death_dt",
+  "drv_ae_death_dt",
+  "rbqm_flags"
+)
+
+test_that("Qual: mappings now done by individual domain, test that inputs and outputs of priority 1 mappings are completed as expected (#97, #114, #128, #129, #169)", {
   priority1 <- c(
     "AE.yaml",
     "ENROLL.yaml",
@@ -36,30 +46,33 @@ test_that("Qual: mappings now done by individual domain, test that inputs and ou
   # Needed columns of raw data are actually in raw data and retained in final data
   iwalk(
     mapped_p1_yaml,
-    ~ expect_true(all(
-      names(flatten(.x$spec)) %in% names(lData[names(.x$spec)][[1]])
-    ))
-  )
-  iwalk(
-    mapped_p1_yaml,
-    ~ expect_true(all(
-      names(flatten(.x$spec)) %in%
-        names(mapped_data[[flatten(.x$steps)$output]])
-    ))
+    ~ {
+      spec_cols <- names(flatten(.x$spec))
+      source_cols <- names(lData[names(.x$spec)][[1]])
+      mapped_cols <- names(mapped_data[[flatten(.x$steps)$output]])
+      expected_cols <- union(
+        setdiff(spec_cols, disp_source_fields),
+        intersect(spec_cols, source_cols)
+      )
+
+      expect_true(all(expected_cols %in% source_cols))
+      expect_true(all(expected_cols %in% mapped_cols))
+    }
   )
 })
 
 
 # Priority 2 Mappings
 
-test_that("Qual: mappings now done by individual domain, test that inputs and outputs of priority 2 mappings are completed as expected (#97, #114, #166)", {
+test_that("Qual: mappings now done by individual domain, test that inputs and outputs of priority 2 mappings are completed as expected (#97, #114, #166, #169)", {
   priority2 <- c(
     "DATACHG.yaml",
     "DATAENT.yaml",
     "QUERY.yaml",
     "Death.yaml",
     "VS.yaml",
-    "IPNS.yaml"
+    "IPNS.yaml",
+    "DISP.yaml"
   )
 
   mapped_p2_yaml <- map(
@@ -90,16 +103,19 @@ test_that("Qual: mappings now done by individual domain, test that inputs and ou
 
   iwalk(
     mapped_p2_yaml,
-    ~ expect_true(
-      flatten(.x$steps)$output %in%
-        c(names(mapped_data), "Temp_SubjectLookup", "Temp_Death", "Temp_VS")
-    )
+    ~ expect_true(flatten(.x$steps)$output %in% c(
+      names(mapped_data),
+      "Temp_SubjectLookup",
+      "Temp_Death",
+      "Temp_VS",
+      "Mapped_DISP"
+    ))
   )
 
   iwalk(
     mapped_p2_yaml,
     ~ expect_true(all(
-      names(flatten(.x$spec)) %in%
+      setdiff(names(flatten(.x$spec)), disp_source_fields) %in%
         c(
           names(lData[names(.x$spec)][[1]]),
           names(lData["Raw_SUBJ"][[1]]),
