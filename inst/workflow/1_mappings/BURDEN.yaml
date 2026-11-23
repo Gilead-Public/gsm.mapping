@@ -1,0 +1,39 @@
+meta:
+  Type: Mapped
+  ID: BURDEN
+  Description: Site Burden (DQS Active Protocol Count) Mapping
+  Priority: 1
+spec:
+  Raw_SITE:
+    studyid:
+      type: character
+      source_col: protocol
+    invid:
+      type: character
+      source_col: pi_number
+  Raw_BURDEN:
+    invid:
+      type: character
+      source_col: edc_site_id
+    active_protocol_count:
+      type: integer
+steps:
+  - output: Temp_BurdenSites
+    name: workr::RunQuery
+    params:
+      df: Raw_SITE
+      strQuery: "SELECT DISTINCT studyid, invid FROM df"
+  - output: Temp_Burden
+    name: workr::RunQuery
+    params:
+      df: Raw_BURDEN
+      strQuery: "SELECT DISTINCT invid, active_protocol_count FROM df"
+  # Sites without a DQS row keep NA (missing coverage is not zero burden), and
+  # conflicting counts for one invid error rather than duplicate the site (#476 SB-Q2, SB-Q5).
+  - output: Mapped_BURDEN
+    name: dplyr::left_join
+    params:
+      x: Temp_BurdenSites
+      'y': Temp_Burden
+      by: invid
+      relationship: many-to-one
