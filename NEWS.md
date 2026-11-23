@@ -1,5 +1,7 @@
 # gsm.mapping (development version)
 
+- Added the `BURDEN` mapping, producing `Mapped_BURDEN` with each study site's DQS active-protocol count (`active_protocol_count`) for the Site Burden KRI. Sites without a DQS row get `NA`, not 0, and conflicting counts for one site raise an error (#182).
+
 # gsm.mapping v1.2.0
 
 This minor release adds the mappings needed for the IP Monitoring (IP non-starters and premature treatment discontinuation) and Repeat Measurements metrics.
