@@ -2,6 +2,11 @@
 
 ## gsm.mapping (development version)
 
+- `AE` passes three fatal adverse event fields to `Mapped_AE`: `aeout`
+  (outcome), `aereldrv` (derived relatedness) and `aesdth` (serious:
+  resulted in death)
+  ([\#135](https://github.com/Gilead-Public/gsm.mapping/issues/135)).
+
 ## gsm.mapping v1.2.0
 
 This minor release adds the mappings needed for the IP Monitoring (IP
