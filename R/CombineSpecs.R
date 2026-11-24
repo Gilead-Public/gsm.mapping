@@ -48,7 +48,10 @@ CombineSpecs <- function(lSpecs, bIsWorkflow = TRUE) {
 
   # Combine specs for each domain using lapply/map
   combined_specs <- map(all_domains, function(domain) {
-    domain_specs <- map(lSpecs, ~ if (is.null(.x[[domain]])) list() else .x[[domain]])
+    domain_specs <- map(
+      lSpecs,
+      ~ if (is.null(.x[[domain]])) list() else .x[[domain]]
+    )
     combine_domain(domain_specs)
   })
 
@@ -67,24 +70,37 @@ CombineSpecs <- function(lSpecs, bIsWorkflow = TRUE) {
 #' @return A list representing the combined specifications for the domain.
 #' @keywords internal
 combine_domain <- function(domain_specs) {
-  combined <- reduce(domain_specs, function(combined, spec) {
-    # Ensure all columns exist in both combined and spec
-    combined_cols <- union(names(combined), names(spec))
+  combined <- reduce(
+    domain_specs,
+    function(combined, spec) {
+      # Ensure all columns exist in both combined and spec
+      combined_cols <- union(names(combined), names(spec))
 
-    # Fill missing columns with NULLs in both lists
-    combined <- map(combined_cols, ~ if (is.null(combined[[.x]])) NULL else combined[[.x]])
-    spec <- map(combined_cols, ~ if (is.null(spec[[.x]])) NULL else spec[[.x]])
-    names(combined) <- combined_cols
-    names(spec) <- combined_cols
+      # Fill missing columns with NULLs in both lists
+      combined <- map(
+        combined_cols,
+        ~ if (is.null(combined[[.x]])) NULL else combined[[.x]]
+      )
+      spec <- map(
+        combined_cols,
+        ~ if (is.null(spec[[.x]])) NULL else spec[[.x]]
+      )
+      names(combined) <- combined_cols
+      names(spec) <- combined_cols
 
-    # Combine the specifications using map2
-    combined <- pmap(list(combined, spec, combined_cols), function(combined_col, spec_col, col_name) {
-      update_column(combined_col, spec_col, col_name)
-    })
+      # Combine the specifications using map2
+      combined <- pmap(
+        list(combined, spec, combined_cols),
+        function(combined_col, spec_col, col_name) {
+          update_column(combined_col, spec_col, col_name)
+        }
+      )
 
-    # Ensure the output is a named list
-    set_names(combined, combined_cols)
-  }, .init = list())
+      # Ensure the output is a named list
+      set_names(combined, combined_cols)
+    },
+    .init = list()
+  )
 
   return(combined)
 }
@@ -103,7 +119,9 @@ update_column <- function(existing_col, new_col, col_name) {
     # Handle type conflict with a warning when available
     if (!is.null(existing_col$type) && !is.null(new_col$type)) {
       if (existing_col$type != new_col$type) {
-        cli_warn("Type mismatch for `{col_name}`. Using first type: {existing_col$type}")
+        cli_warn(
+          "Type mismatch for `{col_name}`. Using first type: {existing_col$type}"
+        )
       }
     }
   } else {

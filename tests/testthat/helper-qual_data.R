@@ -79,7 +79,11 @@ domains <- c(gsub("Raw_", "", names(lData)), "IPNS")
 ## Get Mapped data
 mappings_wf <- workr::MakeWorkflowList(
   strNames = domains,
-  strPath = file.path(system.file(package = "gsm.mapping"), "workflow", "1_mappings")
+  strPath = file.path(
+    system.file(package = "gsm.mapping"),
+    "workflow",
+    "1_mappings"
+  )
 )
 
 for (workflow_name in names(mappings_wf)) {
