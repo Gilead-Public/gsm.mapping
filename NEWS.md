@@ -1,4 +1,6 @@
-# gsm.mapping (development version)
+# gsm.mapping v1.3.0
+
+This minor release adds the fatal adverse event fields needed for the Premature Deaths report's Fatal AE Listing.
 
 - `AE` passes three fatal adverse event fields to `Mapped_AE`: `aeout` (outcome), `aereldrv` (derived relatedness) and `aesdth` (serious: resulted in death) (#135).
 
