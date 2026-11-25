@@ -1,5 +1,6 @@
 # gsm.mapping (development version)
 
+- `Mapped_EXCLUSION` gains `iecat_concat`, the inclusion/exclusion category of each code in `ietestcd_concat` (#188).
 - `AE` passes three fatal adverse event fields to `Mapped_AE`: `aeout` (outcome), `aereldrv` (derived relatedness) and `aesdth` (serious: resulted in death) (#135).
 
 # gsm.mapping v1.2.0

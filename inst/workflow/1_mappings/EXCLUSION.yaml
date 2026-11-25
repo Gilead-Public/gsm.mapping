@@ -55,7 +55,8 @@ steps:
       strQuery: "SELECT
         subjid,
         studyid,
-        array_to_string(array_agg(ietestcd), ',') AS ietestcd_concat,
+        array_to_string(array_agg(ietestcd ORDER BY ietestcd), ',') AS ietestcd_concat,
+        array_to_string(array_agg(iecat_custom ORDER BY ietestcd), ',') AS iecat_concat,
         ie_violation
       FROM df
       GROUP BY studyid, subjid, ie_violation"
